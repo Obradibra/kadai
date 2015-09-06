@@ -1,3 +1,13 @@
+<?php
+$pdo = new PDO('mysql:host=localhost;dbname=cs_academy;charset=utf8', 'root', '');
+$sql = "SELECT * FROM kadai";
+$stmt = $pdo->prepare($sql);
+$stmt->execute();
+$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$pdo = null;
+?>
+￼
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,6 +30,24 @@
             </ul>
         </div>
     </header>
+    
+    <table>
+    <?php
+foreach($result as $row){
+    echo "<tr>";
+    echo "<td>";
+    echo $row["news_title"];
+    echo "</td>";
+    echo "<td>";
+    echo $row["news_detail"];
+    echo "</td>";
+    echo "<td>";
+    echo $row["create_date"];
+    echo "</td>";
+    echo "</tr>";
+}
+    ?>
+</table>
     
     <section class="news contents-box">
         <h2 class="section-title text-center">
